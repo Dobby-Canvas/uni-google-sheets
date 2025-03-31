@@ -8,49 +8,55 @@ namespace UGS
 
         public static string GoogleFolderID
         {
+            private static string _googleFolderId;
+            private static string _scriptURL;
+            private static string _scriptPassword;
+            private static string _generateCodePath = "Assets/UGS.Generated/Scripts/";
+            private static string _jsonDataPath = "Assets/UGS.Generated/Resources/";
+            private static string _runtimeDataPath = "UGS/UGS.Data/";
+
             get
             {
 #if UGS_SECURITY_MODE
                 return null;
 #else
-                UGSettingObject.Create();
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
-                if (setting == null)
+            if (_googleFolderId == null)
                 {
                     throw new System.Exception(Message);
                 }
-                return setting.GoogleFolderID;
+                return _googleFolderId;
 #endif
 
             }
             set
             {
 #if !UGS_SECURITY_MODE
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+                var setting = new UGSettingObject();
+
+                var _googleFolderId = System.Environment.GetEnvironmentVariable("UGS_GOOGLE_FOLDER_ID");
                 if (setting == null)
                 {
                     throw new System.Exception(Message);
                 }
                 setting.GoogleFolderID = value;
+                _googleFolderId = value;
 #endif
-                var _ = value;
 #if UNITY_EDITOR && !UGS_SECURITY_MODE
                 UnityEditor.EditorUtility.SetDirty(setting);
-#endif 
+#endif
             }
         }
         public static string ScriptURL
         {
             get
             {
-#if !UGS_SECURITY_MODE       
-                UGSettingObject.Create();
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
-                if (setting == null)
+#if !UGS_SECURITY_MODE
+                var _scriptURL = System.Environment.GetEnvironmentVariable("UGS_SCRIPT_URL");
+                if (_scriptURL == null)
                 {
                     throw new System.Exception(Message);
                 }
-                return setting.ScriptURL;
+                return _scriptURL;
 #endif
 #pragma warning disable 162
                 return null;
@@ -59,7 +65,7 @@ namespace UGS
             set
             {
 #if !UGS_SECURITY_MODE
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+                var setting = new UGSettingObject();
                 if (setting == null)
                 {
                     throw new System.Exception(Message);
@@ -67,7 +73,8 @@ namespace UGS
                 setting.ScriptURL = value;
 #endif
                 var __ = value;
-#if UNITY_EDITOR&& !UGS_SECURITY_MODE
+                _scriptURL = value;
+#if UNITY_EDITOR && !UGS_SECURITY_MODE
                 UnityEditor.EditorUtility.SetDirty(setting);
 #endif
             }
@@ -78,13 +85,12 @@ namespace UGS
             get
             {
 #if !UGS_SECURITY_MODE
-                UGSettingObject.Create();
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
-                if (setting == null)
+                var _scriptPassword = System.Environment.GetEnvironmentVariable("UGS_SCRIPT_PASSWORD");
+                if (_scriptPassword == null)
                 {
                     throw new System.Exception(Message);
                 }
-                return setting.ScriptPassword;
+                return _scriptPassword;
 #endif
 #pragma warning disable 162
                 return null;
@@ -93,15 +99,16 @@ namespace UGS
             set
             {
 #if !UGS_SECURITY_MODE
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+                var setting = new UGSettingObject();
                 if (setting == null)
                 {
                     throw new System.Exception(Message);
                 }
                 setting.ScriptPassword = value;
+                _scriptPassword = value;
 #endif
                 var _ = value;
-#if UNITY_EDITOR&& !UGS_SECURITY_MODE
+#if UNITY_EDITOR && !UGS_SECURITY_MODE
                 UnityEditor.EditorUtility.SetDirty(setting);
 #endif
             }
@@ -111,23 +118,18 @@ namespace UGS
         {
             get
             {
-                UGSettingObject.Create();
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
-                if (setting == null)
-                {
-                    throw new System.Exception(Message);
-                }
-                return setting.GenerateCodePath;
+                return _generateCodePath;
             }
             set
             {
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+                var setting = new UGSettingObject();
                 if (setting == null)
                 {
                     throw new System.Exception("UGSettingObject.asset 파일을 찾을 수 없습니다. 메뉴 가이드를 따라 세팅파일을 작성해주세요. <color=#00ff00><b>HamsterLib -> UGS -> UGSetting</b></color>");
                 }
                 setting.GenerateCodePath = value;
-#if UNITY_EDITOR&& !UGS_SECURITY_MODE
+                _generateCodePath = value;
+#if UNITY_EDITOR && !UGS_SECURITY_MODE
                 UnityEditor.EditorUtility.SetDirty(setting);
 #endif
             }
@@ -137,23 +139,18 @@ namespace UGS
         {
             get
             {
-                UGSettingObject.Create();
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
-                if (setting == null)
-                {
-                    throw new System.Exception(Message);
-                }
-                return setting.DataPath;
+                return _jsonDataPath;
             }
             set
             {
-                UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+                var setting = new UGSettingObject();
                 if (setting == null)
                 {
                     throw new System.Exception("UGSettingObject.asset 파일을 찾을 수 없습니다. 메뉴 가이드를 따라 세팅파일을 작성해주세요. <color=#00ff00><b>HamsterLib -> UGS -> UGSetting</b></color>");
                 }
                 setting.DataPath = value;
-#if UNITY_EDITOR&& !UGS_SECURITY_MODE
+                _jsonDataPath = value;
+#if UNITY_EDITOR && !UGS_SECURITY_MODE
                 UnityEditor.EditorUtility.SetDirty(setting);
 #endif
             }
