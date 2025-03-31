@@ -1,12 +1,12 @@
 {
-  "name": "com.shlifedev.ugs",
-  "version": "1.1.0",
-  "displayName": "Uni Google Sheets",
-  "description": "Google Sheet Intergration for Unity",
-  "dependencies": { 
+  "name": "com.dobby.google-sheets",
+  "version": "1.0.0",
+  "displayName": "Google Sheets for Unity",
+  "description": "UPM-compatible Google Sheets access",
+  "dependencies": {
     "com.unity.nuget.newtonsoft-json": "2.0.0"
- },
- "keywords": [
+  },
+  "keywords": [
     "UGS",
     "Unity Google Sheets",
     "Google Sheet"
