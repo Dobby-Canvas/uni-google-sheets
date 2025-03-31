@@ -24,24 +24,6 @@ namespace UGS
         [Header("Base64 사용"), HideInInspector]
         public bool base64 = false;
 
-
-
-        public static void Create()
-        {
-#if UNITY_EDITOR
-            var res = Resources.Load("UGSettingObject") as UGSettingObject;
-            if (res != null)
-            {
-                return;
-            }
-            Debug.Log("UGSettingObject Missing, New Created");
-            var di = System.IO.Directory.CreateDirectory("Assets/Resources/");
-            var obj = new UGSettingObject();
-            UnityEditor.AssetDatabase.CreateAsset(obj, "Assets/Resources/UGSettingObject.asset");
-            UnityEditor.EditorUtility.SetDirty(obj);
-#endif
-
-        }
     }
 }
 #endif

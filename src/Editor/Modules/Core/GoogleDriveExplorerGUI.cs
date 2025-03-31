@@ -224,7 +224,7 @@ namespace UGS.Editor
         private static void WriteMetaData(List<FileData> datas)
         {
 
-            UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+            UGSettingObject setting = new UGSettingObject();
             string ugsMetaFileName = "meta.bin";
             var list = datas.Select(x => x.fileName).ToList();
             var joined = string.Join(",", list);

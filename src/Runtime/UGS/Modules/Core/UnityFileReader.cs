@@ -1,4 +1,4 @@
-﻿#if UNITY_2017_1_OR_NEWER || UNITY_BUILD 
+﻿#if UNITY_2017_1_OR_NEWER || UNITY_BUILD
 using GoogleSheet.IO;
 using System.Collections.Generic;
 using UnityEngine;
@@ -12,7 +12,7 @@ namespace UGS.IO
         public string ReadData(string fileName)
         {
             string content = null;
-            UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+            UGSettingObject setting = new UGSettingObject();
             if (_)
             {
                 content = LoadAssetFromDownloadedPath(fileName);
@@ -76,7 +76,7 @@ namespace UGS.IO
 
         public string RuntimeAssetLoad(string fileName)
         {
-            UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+            UGSettingObject setting = new UGSettingObject();
             var combine = System.IO.Path.Combine(UGSettingObjectWrapper.JsonDataPath, fileName);
             combine = combine.Replace("\\", "/");
             var filePath = ToUnityResourcePath(combine);
@@ -84,7 +84,7 @@ namespace UGS.IO
             filePath = filePath.Replace("Resources/", null);
 #if UGS_DEBUG
             Debug.Log(filePath);
-#endif 
+#endif
 
             var textasset = Resources.Load<TextAsset>(filePath);
             if (textasset == null)

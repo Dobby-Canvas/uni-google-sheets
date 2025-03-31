@@ -10,7 +10,7 @@ namespace UGS.IO
 
         public void WriteCS(string writePath, string content)
         {
-            UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+            UGSettingObject setting = new UGSettingObject();
 #if UNITY_EDITOR
             System.IO.Directory.CreateDirectory(setting.GenerateCodePath);
             string targetPath = setting.GenerateCodePath + "/" + writePath + ".cs";
@@ -37,7 +37,7 @@ namespace UGS.IO
 
         public void UnityEditorWriteData(string writePath, string content)
         {
-            UGSettingObject setting = Resources.Load<UGSettingObject>("UGSettingObject");
+            UGSettingObject setting = new UGSettingObject();
 #if UNITY_EDITOR
             System.IO.Directory.CreateDirectory(setting.DataPath);
             string targetPath = setting.DataPath + "/" + writePath + ".json";
@@ -51,7 +51,7 @@ namespace UGS.IO
 
             System.IO.File.WriteAllText(targetPath, content);
             AssetDatabase.Refresh();
-#endif 
+#endif
             //#else
             //            System.IO.Directory.CreateDirectory(setting.RuntimeDataPath);
             //            System.IO.File.WriteAllText(setting.RuntimeDataPath + "/" + writePath + ".json", content);
